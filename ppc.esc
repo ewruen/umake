@@ -1,0 +1,55 @@
+#if %MSVC_IDE && %WINDOWS_SDK
+# output "make umake... "
+#else
+# error "no windows-sdk or vc++"
+#endif
+
+.etreeroot := c
+.c := total
+.envir
+ 
+%PATH    := %%MSVC_IDE
+%LIB     := %%MSVC_LIB     + ';' + %%WINDOWS_SDK + 'lib'
+%INCLUDE := %%MSVC_INCLUDE + ';' + %%WINDOWS_SDK + 'Include'
+ 
+.alter 
+$ MSVC_CL := %%MSVC_BIN+'cl.exe ' 
+$ MSVC_LINK := %%MSVC_BIN+'link.exe '
+$ MSVC_ML := %%MSVC_BIN+'ml.exe '
+
+.pass := total  
+ 
+@ umake_source_c := 'E:\umake\', <.c>
+@ umake_cobj := @ umake_source_c 
+@ umake_cobj @= 'D:\ACC', <.obj>
+@ umake_source_asm := 'E:\umake\', <.asm>
+@ umake_asmobj := @ umake_source_asm 
+@ umake_asmobj @= 'D:\ACC', <.obj>
+@ umake_out := 'D:\ACC', <.exe>, [umake] 
+
+stat $$ MSVC_CL + '/MDd /nologo /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_UNICODE" /D "UNICODE" /Fo' + @umake_cobj   -ODEP -VBATTER + ' /c ' + @umake_source_c   -VBATTER -IDEP_CPP # A 
+stat $$ MSVC_ML + '/nologo /Fo' + @umake_asmobj -ODEP          + ' /c ' + @umake_source_asm -IDEP  # A
+ 
+.pass :=  c
+
+stat $$ MSVC_LINK\
+     + ' /nologo /DEBUG ' \
+     + ' /out:'+ total.@umake_out -ODEP \
+     + ' /SUBSYSTEM:CONSOLE '       \
+     + ' uuid.lib     \
+         psapi.lib    \
+         Shlwapi.lib  \
+         kernel32.lib \
+         user32.lib   \
+         gdi32.lib    \
+         winspool.lib \
+         comdlg32.lib \
+         advapi32.lib \
+         shell32.lib \
+         ole32.lib \
+         oleaut32.lib \
+         uuid.lib \
+         odbc32.lib \
+         odbccp32.lib ' \
+     + total.@umake_cobj -HBATTER -IDEP, SUFFIX_SET ? ' ' \
+     + total.@umake_asmobj -IDEP
