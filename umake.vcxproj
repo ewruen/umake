@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A1221E69-01A5-4B38-98B9-41C0A64DF415}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>umake</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level2</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>psapi.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="analysis.c" />
+    <ClCompile Include="cppmmap.win32.c" />
+    <ClCompile Include="ctl.c" />
+    <ClCompile Include="env.win32.c" />
+    <ClCompile Include="event.win32.c" />
+    <ClCompile Include="file.win32.c" />
+    <ClCompile Include="global.c" />
+    <ClCompile Include="locate.c" />
+    <ClCompile Include="msvc_env.c" />
+    <ClCompile Include="path.c" />
+    <ClCompile Include="pattern.c" />
+    <ClCompile Include="precond.c" />
+    <ClCompile Include="process.win32.c" />
+    <ClCompile Include="sem.win32.c" />
+    <ClCompile Include="udcache.c" />
+    <ClCompile Include="umake.win32.c" />
+    <ClCompile Include="ustream.win32.c" />
+    <ClCompile Include="thread.win32.c" />
+    <ClCompile Include="uchar.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="analysis.h" />
+    <ClInclude Include="ctl.h" />
+    <ClInclude Include="env.h" />
+    <ClInclude Include="event.h" />
+    <ClInclude Include="cas.h" />
+    <ClInclude Include="config.h" />
+    <ClInclude Include="file.h" />
+    <ClInclude Include="global.h" />
+    <ClInclude Include="locate.h" />
+    <ClInclude Include="list.h" />
+    <ClInclude Include="cppmmap.h" />
+    <ClInclude Include="msvc_env.h" />
+    <ClInclude Include="path.h" />
+    <ClInclude Include="pattern.h" />
+    <ClInclude Include="precond.h" />
+    <ClInclude Include="process.h" />
+    <ClInclude Include="readme.h" />
+    <ClInclude Include="sem.h" />
+    <ClInclude Include="udcache.h" />
+    <ClInclude Include="ustream.h" />
+    <ClInclude Include="thread.h" />
+    <ClInclude Include="uchar.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="cas.asm">
+      <FileType>Document</FileType>
+    </MASM>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="analysis.chunk.inl" />
+    <None Include="analysis.pass_base.inl" />
+    <None Include="analysis.replcae.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>
